@@ -20,6 +20,21 @@
     owner: root
     group: root
 
+- name: Determine system repo type
+  ansible.builtin.shell: >
+    export PATH={{ analysis_os_path }};
+    set -o pipefail;
+    subscription-manager repos
+  register: subscription_manager_repos
+  args:
+    executable: /bin/bash
+  ignore_errors: true
+
+- name: Set analysis_convert2rhel_repo_type to 'satellite'
+  ansible.builtin.set_fact:
+    analysis_convert2rhel_repo_type: 'satellite'
+  when: subscription_manager_repos.stdout | regex_search('\/pulp\/content\/' + rhsm_org | string + '\/' + rhsm_activation_key_pre_convert | string )
+
 - name: Include tasks for convert2rhel pre-conversion analysis
   ansible.builtin.include_tasks: analysis-c2r.yml
   # NOTE: I guess this should be extended to more distros
