@@ -6,6 +6,8 @@ analysis_convert2rhel_preconv_opts: ""
 analysis_convert2rhel_eus: false
 analysis_convert2rhel_repos_enabled: []
 analysis_convert2rhel_repos_disabled: []
+analysis_convert2rhel_repo_type: "rhsm"
+rhsm_activation_key_pre_convert: "/"
 
 analysis_os_path: $PATH
 
