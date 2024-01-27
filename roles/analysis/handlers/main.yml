@@ -1,5 +1,16 @@
 ---
 # handlers file for analysis
+- name: Register to pre leapp activation key
+  community.general.redhat_subscription:
+    state: present
+    activationkey: "{{ rhsm_activation_key_pre_convert }}"
+    org_id: "{{ rhsm_org }}"
+    force_register: true
+  when:
+    - analysis_convert2rhel_repo_type == 'satellite'
+    - rhsm_org is defined
+    - rhsm_activation_key_pre_convert is defined
+
 # Keep this last so it's easy to find in the job output.
 - name: Pre-conversion analysis report is done
   ansible.builtin.debug:
