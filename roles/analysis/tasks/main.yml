@@ -42,6 +42,13 @@
   # when:
   #   - ansible_distribution == "CentOS" and ansible_distribution_major_version|int == 7
 
+- name: Display pre-conversion registration variables
+  ansible.builtin.debug:
+    msg:
+      analysis_convert2rhel_repo_type: "{{ analysis_convert2rhel_repo_type }}"
+      rhsm_org: "{{ rhsm_org }}"
+      rhsm_activation_key_pre_convert: "{{ rhsm_activation_key_pre_convert }}"
+
 - name: Notify register to pre convert activation key
   ansible.builtin.assert:
     that: true
