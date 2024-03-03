@@ -20,6 +20,17 @@
   changed_when: "'Pre-conversion analysis report' not in convert2rhel.stdout"
   notify: Remove temporary configuration file
 
+- name: Notify register to pre convert activation key
+  ansible.builtin.assert:
+    that: true
+    # quiet: true
+  changed_when: true
+  notify: Register to pre convert activation key
+  when:
+    - analysis_convert2rhel_repo_type == 'satellite'
+    - rhsm_org is defined
+    - rhsm_activation_key_pre_convert is defined
+
 - name: Include check-results-file.yml
   ansible.builtin.include_tasks: check-results-file.yml
 
