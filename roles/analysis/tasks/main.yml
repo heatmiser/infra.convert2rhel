@@ -56,4 +56,14 @@
   changed_when: true
   notify: Pre-conversion analysis report is done
 
+- name: Register to pre convert activation key
+  community.general.redhat_subscription:
+    state: present
+    activationkey: "{{ rhsm_activation_key_pre_convert }}"
+    org_id: "{{ rhsm_org }}"
+    force_register: true
+  when:
+    - analysis_convert2rhel_repo_type == 'satellite'
+    - rhsm_org is defined
+    - rhsm_activation_key_pre_convert is defined
 ...
