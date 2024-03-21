@@ -20,20 +20,20 @@
     owner: root
     group: root
 
-- name: Determine system repo type
+- name: Register output of 'yum repolist'
   ansible.builtin.shell: >
     export PATH={{ analysis_os_path }};
     set -o pipefail;
-    subscription-manager repos
-  register: subscription_manager_repos
+    yum repolist all --verbose | grep Repo-baseurl | grep -v convert2rhel
   args:
     executable: /bin/bash
-  ignore_errors: true
+  register: yum_repolist_for_baseurl
+  changed_when: yum_repolist_for_baseurl.rc != 0
 
 - name: Set analysis_convert2rhel_repo_type to 'satellite'
   ansible.builtin.set_fact:
     analysis_convert2rhel_repo_type: 'satellite'
-  when: subscription_manager_repos.stdout | regex_search('\/pulp\/content\/' + rhsm_org | string + '\/' + rhsm_activation_key_pre_convert | string )
+  when: yum_repolist_for_baseurl.stdout | regex_search('\/pulp\/content\/' + rhsm_org | string + '\/' + rhsm_activation_key_pre_convert | string )
 
 - name: Include tasks for convert2rhel pre-conversion analysis
   ansible.builtin.include_tasks: analysis-c2r.yml
