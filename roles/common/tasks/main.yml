@@ -42,7 +42,7 @@
 
     - name: Install Convert2RHEL
       ansible.builtin.yum:
-        name: convert2rhel
+        name: convert2rhel-1.7.1-1.el7
 
 - name: Create temporary configuration file
   ansible.builtin.tempfile:
