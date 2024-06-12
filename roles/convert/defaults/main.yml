@@ -6,6 +6,9 @@ convert_convert2rhel_opts: ""
 convert_convert2rhel_eus: false
 convert_convert2rhel_repos_enabled: []
 convert_convert2rhel_repos_disabled: []
+convert_convert2rhel_environment_vars:
+  CONVERT2RHEL_ALLOW_OLDER_VERSION: 1
+  CONVERT2RHEL_OUTDATED_PACKAGE_CHECK_SKIP: 1
 
 convert_os_path: $PATH
 
