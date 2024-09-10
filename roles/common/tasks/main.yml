@@ -74,15 +74,6 @@
         dest: "/etc/yum.repos.d/convert2rhel.repo"
         mode: '0644'
 
-- name: Satellite content host - switch to Convert2RHEL lifecycle environment and content view
-  when: analysis_convert2rhel_repo_type == 'satellite'
-  redhat.satellite.host:
-    name: "{{ inventory_hostname }}"
-    lifecycle_environment: "{{ rhsat_lifecycle_environment }}"
-    content_view: "{{ rhsat_content_view }}"
-    organization: "{{ organization }}"
-  delegate_to: localhost
-
 - name: Install Convert2RHEL
   ansible.builtin.package:
     name: convert2rhel
