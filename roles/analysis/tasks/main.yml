@@ -36,7 +36,7 @@
     name: "{{ inventory_hostname }}"
     lifecycle_environment: "{{ rhsat_lifecycle_environment_pre_convert }}"
     content_view: "{{ rhsat_content_view_pre_convert }}"
-    organization: "{{ org_id }}"
+    organization: "{{ organization }}"
   delegate_to: localhost
 
 ...
