@@ -20,7 +20,7 @@
 - name: Set analysis_convert2rhel_repo_type to 'satellite'
   ansible.builtin.set_fact:
     analysis_convert2rhel_repo_type: 'satellite'
-  when: yum_repolist_for_baseurl.stdout | regex_search('\/pulp\/content\/' + rhsm_org | string + '\/' + rhsm_activation_key_pre_convert | string )
+  when: yum_repolist_for_baseurl.stdout | regex_search('\/pulp\/content\/' + rhsm_org | string + '\/' + rhsat_lifecycle_environment_pre_convert | string )
 
 - name: Patch repositories if dealing with CentOS 7.
   when: ansible_distribution == 'CentOS' and ansible_distribution_major_version | int == 7 and analysis_convert2rhel_repo_type is not 'satellite'
