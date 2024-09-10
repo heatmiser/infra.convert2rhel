@@ -77,7 +77,7 @@
 - name: Satellite content host - switch to Convert2RHEL lifecycle environment and content view
   when: analysis_convert2rhel_repo_type == 'satellite'
   redhat.satellite.host:
-    name: "{{ ansible_host }}"
+    name: "{{ ansible_hostname }}"
     lifecycle_environment: "{{ rhsat_lifecycle_environment }}"
     content_view: "{{ rhsat_content_view }}"
   delegate_to: localhost
