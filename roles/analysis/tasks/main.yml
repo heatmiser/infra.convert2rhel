@@ -33,7 +33,7 @@
 - name: Satellite content host - switch back to pre Convert2RHEL lifecycle environment and content view
   when: analysis_convert2rhel_repo_type == 'satellite'
   redhat.satellite.host:
-    name: "{{ ansible_hostname }}"
+    name: "{{ inventory_hostname }}"
     lifecycle_environment: "{{ rhsat_lifecycle_environment_pre_convert }}"
     content_view: "{{ rhsat_content_view_pre_convert }}"
   delegate_to: localhost
