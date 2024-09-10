@@ -23,7 +23,7 @@
   when: yum_repolist_for_baseurl.stdout | regex_search('\/pulp\/content\/' + rhsm_org | string + '\/' + rhsat_lifecycle_environment_pre_convert | string )
 
 - name: Patch repositories if dealing with CentOS 7.
-  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version | int == 7 and analysis_convert2rhel_repo_type is not 'satellite'
+  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version | int == 7 and analysis_convert2rhel_repo_type != 'satellite'
   block:
     - name: Comment mirrorlist in all repos.
       ansible.builtin.replace:
@@ -40,7 +40,7 @@
       loop: "{{ common_centos7_repos }}"
 
 - name: Patch repositories if dealing with CentOS 8.
-  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version | int == 8 and analysis_convert2rhel_repo_type is not 'satellite'
+  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version | int == 8 and analysis_convert2rhel_repo_type != 'satellite'
   block:
     - name: Comment mirrorlist in all repos.
       ansible.builtin.replace:
@@ -57,7 +57,7 @@
       loop: "{{ common_centos8_repos }}"
 
 - name: Setup Convert2RHEL repository
-  when: not common_convert2rhel_repo_satellite and analysis_convert2rhel_repo_type is not 'satellite'
+  when: not common_convert2rhel_repo_satellite and analysis_convert2rhel_repo_type != 'satellite'
   block:
     - name: Download Red Hat GPG key
       ansible.builtin.get_url:
