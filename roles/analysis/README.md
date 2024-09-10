@@ -30,6 +30,18 @@ RHSM credentials provide a method to identify content views available from Red H
 | rhsm_org              | String   |  | RHSM organization |
 | rhsm_activation_key   | String   |  | RHSM activation key |
 
+## Red Hat Satellite Content Hosts variables
+
+Red Hat Satellite Content Hosts variable are used to identify content views available from Red Hat Satellite. Use these variables to specify the required lifecycle environment and content view for the given phases of the conversion process.
+
+| Name                  | Type | Default value           | Description                                     |
+|-----------------------|------|-------------------------|-------------------------------------------------|
+| rhsat_content_view         | String   |  | Red Hat Satellite Content View used during conversion process |
+| rhsat_lifecycle_environment         | String   |  | Red Hat Satellite Lifecycle Environment used during conversion process |
+| rhsat_content_view_pre_convert         | String   |  | Red Hat Satellite Content View prior to Conversion |
+| rhsat_lifecycle_environment_pre_convert         | String   |  | Red Hat Satellite Lifecycle Environment prior to Conversion |
+
+
 Dependencies
 ------------
 
