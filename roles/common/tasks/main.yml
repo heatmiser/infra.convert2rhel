@@ -17,14 +17,15 @@
   register: yum_repolist_for_baseurl
   changed_when: yum_repolist_for_baseurl.rc != 0
 
-- name: Set common_convert2rhel_repo_type to 'satellite'
+- name: Set common_convert2rhel_repo_satellite to 'true' for Satellite content hosts
   when: yum_repolist_for_baseurl.stdout | regex_search('\/pulp\/content\/' + rhsm_org | string )
   ansible.builtin.set_fact:
+    common_convert2rhel_repo_satellite: true
     common_convert2rhel_repo_type: 'satellite'
   # when: yum_repolist_for_baseurl.stdout | regex_search('\/pulp\/content\/' + rhsm_org | string + '\/' + rhsat_lifecycle_environment_pre_convert | string )
 
 - name: Patch repositories if dealing with CentOS 7.
-  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version | int == 7 and common_convert2rhel_repo_type != 'satellite'
+  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version | int == 7 and not common_convert2rhel_repo_satellite
   block:
     - name: Comment mirrorlist in all repos.
       ansible.builtin.replace:
@@ -41,7 +42,7 @@
       loop: "{{ common_centos7_repos }}"
 
 - name: Patch repositories if dealing with CentOS 8.
-  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version | int == 8 and common_convert2rhel_repo_type != 'satellite'
+  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version | int == 8 and not common_convert2rhel_repo_satellite
   block:
     - name: Comment mirrorlist in all repos.
       ansible.builtin.replace:
@@ -58,7 +59,7 @@
       loop: "{{ common_centos8_repos }}"
 
 - name: Setup Convert2RHEL repository
-  when: not common_convert2rhel_repo_satellite and common_convert2rhel_repo_type != 'satellite'
+  when: not common_convert2rhel_repo_satellite
   block:
     - name: Download Red Hat GPG key
       ansible.builtin.get_url:
