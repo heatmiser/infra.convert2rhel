@@ -31,4 +31,6 @@ common_convert2rhel_repo_type: "rhsm"
 common_convert2rhel_repokey_url: https://security.access.redhat.com/data/fd431d51.txt
 common_convert2rhel_7_repofile_url: https://cdn-public.redhat.com/content/public/addon/dist/convert2rhel/server/7/7Server/x86_64/files/repofile.repo
 common_convert2rhel_8_repofile_url: https://cdn-public.redhat.com/content/public/addon/dist/convert2rhel8/8/x86_64/files/repofile.repo
+
+common_os_path: $PATH
 ...
