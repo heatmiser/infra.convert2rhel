@@ -9,7 +9,7 @@
 
 - name: Register output of 'yum repolist'
   ansible.builtin.shell: >
-    export PATH={{ analysis_os_path }};
+    export PATH={{ common_os_path }};
     set -o pipefail;
     yum repolist all --verbose | grep Repo-baseurl | grep -v convert2rhel
   args:
