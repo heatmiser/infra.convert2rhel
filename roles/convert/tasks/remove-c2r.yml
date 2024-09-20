@@ -3,7 +3,7 @@
   ansible.builtin.file:
     path: /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
     state: absent
-  when: convert_gpg_key_remove and and not common_convert2rhel_repo_satellite
+  when: convert_gpg_key_remove and not common_convert2rhel_repo_satellite
 
 - name: Remove convert2rhel repo
   ansible.builtin.file:
