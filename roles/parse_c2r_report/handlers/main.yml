@@ -1,3 +1,15 @@
 ---
-# handlers file for convert
+# handlers file for parse_c2r_report
+- name: Display analysis inhibitors
+  ansible.builtin.debug:
+    var: convert2rhel_inhibitors_txt.stdout_lines
+  when: conversion_inhibited
+  listen: Analysis inhibitors found
+
+- name: Pre-conversion analysis report is done
+  ansible.builtin.debug:
+    msg: >-
+      The pre-conversion analysis report generation is now complete.
+      {{ 'WARNING: Inhibitors' if conversion_inhibited else 'SUCCESS: No inhibitors' }} found.
+      Review the result file at {{ analysis_result_filename_txt }}.
 ...
