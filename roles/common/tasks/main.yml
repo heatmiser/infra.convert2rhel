@@ -78,7 +78,7 @@
 
 - name: Install Convert2RHEL
   ansible.builtin.package:
-    name: convert2rhel
+    name: convert2rhel-2.1.0
     enablerepo: "{{ common_yum_enable_repos | default(omit) }}"
 
 - name: Create temporary configuration file
